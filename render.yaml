@@ -1,10 +1,10 @@
 # Render Blueprint for Credit Card Approval Prediction
-# Deploys both backend (Flask) and frontend (Next.js)
+# Deploys the Flask backend API.
+# Deploy the Next.js frontend separately on Vercel using vercel.json.
 
 previewsEnabled: false
 
 services:
-  # Backend API Service
   - name: credit-approval-api
     plan: free
     region: oregon
@@ -13,22 +13,7 @@ services:
     rootDir: server/web
     buildCommand: pip install -r requirements.txt
     startCommand: python app.py
-    healthCheckPath: /
+    healthCheckPath: /health
     envVars:
       - key: PYTHON_VERSION
         value: "3.11"
-
-  # Frontend Web Service
-  - name: credit-approval-frontend
-    plan: free
-    region: oregon
-    type: web_service
-    runtime: node
-    rootDir: client
-    buildCommand: npm install && npm run build
-    startCommand: npm start
-    envVars:
-      - key: NODE_ENV
-        value: production
-      - key: FLASK_API_URL
-        value: https://credit-approval-api-fb03.onrender.com
