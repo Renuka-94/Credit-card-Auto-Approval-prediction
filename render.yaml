@@ -8,7 +8,7 @@ services:
   - name: credit-approval-api
     plan: free
     region: oregon
-    type: web_service
+    type: web
     runtime: python
     rootDir: server/web
     buildCommand: pip install -r requirements.txt
