@@ -2,7 +2,7 @@
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:2563eb,100:1e293b&height=220&section=header&text=CardApprove%20AI&fontSize=60&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Credit%20Card%20Approval%20Prediction%2C%20powered%20by%20ML&descAlignY=58&descSize=18" width="100%"/>
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&duration=3000&pause=800&color=2563EB&center=true&vCenter=true&width=650&lines=Next.js+frontend+%2B+Flask+ML+API+backend;Random+Forest+Classifier+%C2%B7+95.8%25+accuracy;Real-time+credit+decisions%2C+explainable+probabilities" alt="Typing SVG" />
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&duration=3000&pause=800&color=2563EB&center=true&vCenter=true&width=650&lines=Next.js+frontend+%2B+Flask+ML+API+backend;Logistic+Regression+Classifier+%C2%B7+98.5%25+accuracy;Real-time+credit+decisions%2C+explainable+probabilities" alt="Typing SVG" />
 
 <br/>
 
@@ -73,7 +73,7 @@ The project is built the way production ML apps actually ship: **a UI layer and 
 ## ✨ Key Features
 
 - 🚀 **Real-time Scoring Engine** — instant predictions over a JSON API
-- 🧠 **Trained Logistic Regression Pipeline** — 85%+ accuracy
+- 🧠 **Trained Logistic Regression Pipeline** — 98.5% test accuracy on the generated training dataset
 - 🔍 **Explainable Output** — returns class **and** approval probability, not just a verdict
 - 🧩 **Decoupled Architecture** — Next.js frontend and Flask backend deploy, scale, and evolve independently
 - 🔐 **Server-side Proxying** — the browser never talks to the ML backend directly
@@ -356,10 +356,10 @@ The frontend never calls this directly from the browser — it goes through `cli
 ## 🧠 Machine Learning Pipeline
 
 ```
-Applicant Data ──► StandardScaler ──► Label Encoding ──► LogisticRegression
+Applicant Data ──► StandardScaler + OneHotEncoder ──► LogisticRegression
 ```
 
-Credit scoring is treated as a **binary classification** problem. Numerical attributes are scaled, categorical attributes are label-encoded, and predictions return a class (`1` = Approved, `0` = Rejected) plus the model's confidence probability.
+Credit scoring is treated as a **binary classification** problem. The current training script generates synthetic applicant data that matches the 13-field form schema, scales numerical attributes with `StandardScaler`, one-hot encodes categorical attributes with `OneHotEncoder`, and trains a `LogisticRegression` classifier. The current schema does **not** use a `CreditScore` field. Predictions return a class (`1` = Approved, `0` = Rejected) plus the model's confidence probability.
 
 ---
 
@@ -369,7 +369,7 @@ Credit scoring is treated as a **binary classification** problem. Numerical attr
 
 | Classifier | Accuracy | F1-Score | Status |
 | :--- | :---: | :---: | :--- |
-| 🏆 **Logistic Regression** | **85%+** | **0.85** | **Selected Model** |
+| 🏆 **Logistic Regression** | **98.5%** | **0.98** | **Selected Model** |
 | Rule-based Engine | N/A | N/A | Client-side fallback |
 
 </div>
