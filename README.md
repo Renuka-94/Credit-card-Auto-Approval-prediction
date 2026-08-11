@@ -184,9 +184,10 @@ sequenceDiagram
 
 ### Prerequisites
 
-```bash
+```powershell
 node --version      # 18+
-python3 --version   # 3.9+
+npm.cmd --version
+python --version    # 3.9+ if Python is installed globally
 ```
 
 ### 1. Clone
@@ -198,44 +199,65 @@ cd Credit-card-Auto-Approval-prediction
 
 ### 2. Backend — Flask API
 
-```bash
-cd server/web
-python3 -m venv .venv && source .venv/bin/activate
-pip install --upgrade pip && pip install -r requirements.txt
+Open a terminal from the project root:
+
+```powershell
+cd C:\Users\peera\OneDrive\Documents\SIP\Credit-card-Auto-Approval-prediction\server\web
+pip install -r requirements.txt
 
 # place the trained pipeline at server/web/models/credit_approval_model.pkl
 # or generate it by running:
 python train_model.py
 
-cp .env.example .env
 python app.py
 ```
 
+If `python` is not available on your Windows PATH, run the app with the full Python executable path available on your machine.
+
 Runs on **http://127.0.0.1:8080** — verify with:
 
-```bash
-curl http://127.0.0.1:8080/health
+```powershell
+Invoke-RestMethod http://127.0.0.1:8080/health
 ```
 
-### 3. Frontend — Next.js (new terminal, from repo root)
+Keep this backend terminal open.
 
-```bash
-cd client
-pnpm install
-cp .env.example .env.local     # set FLASK_API_URL=http://127.0.0.1:8080
-pnpm dev
+### 3. Frontend — Next.js
+
+Open a second terminal:
+
+```powershell
+cd C:\Users\peera\OneDrive\Documents\SIP\Credit-card-Auto-Approval-prediction\client
+npm.cmd install
+$env:NEXT_TEST_WASM='1'
+$env:NEXT_TEST_WASM_DIR='C:\Users\peera\OneDrive\Documents\SIP\Credit-card-Auto-Approval-prediction\client\node_modules\@next\swc-wasm-nodejs'
+.\node_modules\.bin\next.cmd dev --webpack
 ```
 
-Open **http://localhost:3000** 🎉
+Open the URL shown in the frontend terminal:
+
+```text
+http://localhost:3000
+```
+
+If port `3000` is already in use, Next.js may start on:
+
+```text
+http://localhost:3001
+```
+
+Keep this frontend terminal open.
 
 ### 4. Running both together
 
 | Terminal | Command | Runs on |
 | :--- | :--- | :--- |
-| 1 — Backend | `cd server/web && python app.py` | `http://127.0.0.1:8080` |
-| 2 — Frontend | `cd client && pnpm dev` | `http://localhost:3000` |
+| 1 — Backend | `cd server/web` then `python app.py` | `http://127.0.0.1:8080` |
+| 2 — Frontend | `cd client` then `.\node_modules\.bin\next.cmd dev --webpack` | `http://localhost:3000` or `http://localhost:3001` |
 
 Both must be running — the frontend's `/api/predict` route forwards live requests to `FLASK_API_URL`.
+
+To stop either server, press `Ctrl + C` in its terminal.
 
 ---
 
