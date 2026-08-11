@@ -1,3 +1,5 @@
+'use client'
+
 import Navbar from '@/components/navbar'
 import PredictForm from '@/components/predict-form'
 import { CreditCard } from 'lucide-react'

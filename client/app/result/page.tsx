@@ -1,3 +1,5 @@
+'use client'
+
 import { Suspense } from 'react'
 import Navbar from '@/components/navbar'
 import ResultCard from '@/components/result-card'

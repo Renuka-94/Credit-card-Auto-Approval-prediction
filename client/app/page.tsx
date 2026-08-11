@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 import { ShieldCheck, Zap, BarChart3, ArrowRight, CheckCircle2, BrainCircuit } from 'lucide-react'
 import Navbar from '@/components/navbar'

@@ -1,3 +1,5 @@
+'use client'
+
 import Navbar from '@/components/navbar'
 import { Database, BrainCircuit, FlaskConical, Globe, Target, Workflow, Monitor, Cloud } from 'lucide-react'
 
